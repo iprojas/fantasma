@@ -7,8 +7,15 @@ const DOCUMENT_URL =
 const projectRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outputPath = join(projectRoot, "demo", "google-doc.html");
 
-const response = await fetch(DOCUMENT_URL, {
+// Google caches published documents for several minutes. A unique query string
+// makes each deployment request a fresh published version instead of reusing a
+// previously cached response.
+const documentUrl = new URL(DOCUMENT_URL);
+documentUrl.searchParams.set("cacheBust", Date.now().toString());
+
+const response = await fetch(documentUrl, {
   headers: { Accept: "text/html; charset=utf-8" },
+  cache: "no-store",
   redirect: "follow",
   signal: AbortSignal.timeout(15_000),
 });

@@ -9,9 +9,13 @@ loadDocument();
 async function loadDocument() {
   try {
     const documentUrl = new URL("../google-doc.html", import.meta.url);
+    // GitHub Pages and browsers may retain the previous generated HTML. The
+    // versioned request ensures a reload reads the artifact from the latest
+    // deployment.
+    documentUrl.searchParams.set("v", Date.now().toString());
     const response = await fetch(documentUrl, {
       headers: { Accept: "text/html" },
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     if (!response.ok) {

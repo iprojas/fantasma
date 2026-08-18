@@ -22,6 +22,13 @@ solo renderiza headings, párrafos, listas, enlaces, énfasis e imágenes; no
 inserta estilos ni clases de Google Docs.
 
 GitHub Actions vuelve a obtener el documento y despliega `demo/` en GitHub Pages
-cada cinco minutos. También puede ejecutarse manualmente desde la pestaña
-Actions. El horario de GitHub puede sufrir demoras cuando hay alta demanda, pero
-las ediciones no requieren modificar ni volver a subir el código.
+cada cinco minutos. Cada consulta evita reutilizar una versión en caché, tanto
+de Google Docs como del navegador. También puede ejecutarse manualmente desde la
+pestaña Actions. El horario de GitHub puede sufrir demoras cuando hay alta
+demanda, pero las ediciones no requieren modificar ni volver a subir el código.
+
+GitHub Pages es un sitio estático, por lo que no puede recibir una notificación
+directa al editar un Google Doc. Para actualización inmediata por cada edición
+se debe conectar un webhook de Google Drive a un servicio con credenciales (por
+ejemplo, un Worker) que inicie el despliegue; la configuración de ese servicio
+requiere acceso al proyecto de Google y al repositorio.

@@ -1,7 +1,7 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 0.85rem + 0.55vw, 1.45rem);
+  font-size: clamp(2rem, 0.85rem + 0.55vw, 2.45rem);
   font-style: italic;
   font-weight: 900;
 }
@@ -17,12 +17,17 @@ body {
 }
 
 html {
-  background: #fff;
+  background: light-dark(#fff, #111);
   filter: url("#contrast");
 }
 
 body {
-  color: #000;
+  color: light-dark(#000, #fff);
+}
+
+h1 {
+    font-size: 2em!important;
+    text-align: center;
 }
 
 #container {
@@ -32,21 +37,30 @@ body {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  filter: url("#noise") blur(7px);
+  filter: url("#noise") blur(0px);
 }
 
 .editorial-content {
   width: 100%;
   min-height: 100%;
   margin: 0;
-  padding: 0;
-  line-height: 2.5rem;
+  padding: 5%;
+  line-height: 1.2rem;
   overflow-wrap: anywhere;
   word-break: break-all;
 }
 
 .editorial-content :is(h1, h2, h3, h4, h5, h6, p, ul, ol, figure) {
   margin-block: 0;
+}
+
+.editorial-content p {
+  margin-block-end: 0.7em;
+}
+
+.editorial-content strong {
+  font-weight: 900;
+  font-synthesis: weight;
 }
 
 .editorial-content :is(ul, ol) {
@@ -58,7 +72,7 @@ body {
 }
 
 .editorial-content a {
-  color: inherit;
+  color: light-dark(#0000ee, #6ea8fe);
   text-decoration-thickness: 0.12em;
   text-underline-offset: 0.12em;
 }
