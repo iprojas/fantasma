@@ -8,8 +8,10 @@ loadDocument();
 
 async function loadDocument() {
   try {
-    const response = await fetch("/api/google-doc", {
+    const documentUrl = new URL("../google-doc.html", import.meta.url);
+    const response = await fetch(documentUrl, {
       headers: { Accept: "text/html" },
+      cache: "no-cache",
     });
 
     if (!response.ok) {
