@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.mjs",
-    "check": "node --check server.mjs && node --check demo/js/google-doc.js && node --check demo/js/render-content.js && node --check demo/js/app.js"
+    "build": "node scripts/fetch-google-doc.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check scripts/fetch-google-doc.mjs && node --check scripts/serve.mjs && node --check demo/js/google-doc.js && node --check demo/js/render-content.js && node --check demo/js/app.js"
   },
   "engines": {
     "node": ">=20"
