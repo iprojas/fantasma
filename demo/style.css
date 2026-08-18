@@ -1,0 +1,86 @@
+:root {
+  color-scheme: light;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 0.85rem + 0.55vw, 1.45rem);
+  font-style: italic;
+  font-weight: 900;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  background: #fff;
+  filter: url("#contrast");
+}
+
+body {
+  color: #000;
+}
+
+#container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  filter: url("#noise") blur(7px);
+}
+
+.editorial-content {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 2.5rem;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+.editorial-content :is(h1, h2, h3, h4, h5, h6, p, ul, ol, figure) {
+  margin-block: 0;
+}
+
+.editorial-content :is(ul, ol) {
+  padding-inline-start: 2.2rem;
+}
+
+.editorial-content :is(h1, h2, h3, h4, h5, h6) {
+  font: inherit;
+}
+
+.editorial-content a {
+  color: inherit;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.12em;
+}
+
+.editorial-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.editorial-content figure {
+  max-width: 100%;
+}
+
+.loading-message,
+.error-message {
+  min-height: 100vh;
+}
+
+.filters {
+  position: fixed;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}

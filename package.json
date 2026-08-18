@@ -1,0 +1,13 @@
+{
+  "name": "imagen-fantasma",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check server.mjs && node --check demo/js/google-doc.js && node --check demo/js/render-content.js && node --check demo/js/app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

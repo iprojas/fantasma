@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Contenido editorial publicado desde Google Docs."
+    />
+    <title>Imagen Fantasma</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main id="container" aria-live="polite" aria-busy="true">
+      <article id="content" class="editorial-content">
+        <p class="loading-message">Cargando…</p>
+      </article>
+    </main>
+
+    <!-- El efecto original de /demo: desplazamiento por ruido y contraste. -->
+    <svg class="filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="noise">
+          <feTurbulence
+            id="turbulence"
+            type="fractalNoise"
+            baseFrequency="0.002"
+            numOctaves="3"
+            result="noise-map"
+            seed="0"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise-map"
+            scale="300"
+          />
+        </filter>
+
+        <filter id="contrast">
+          <feColorMatrix
+            in="SourceGraphic"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -10"
+            result="matrix"
+          />
+          <feComposite in="SourceGraphic" in2="matrix" operator="atop" />
+        </filter>
+      </defs>
+    </svg>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>
