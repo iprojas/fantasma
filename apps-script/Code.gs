@@ -122,3 +122,4 @@ function clearPending(properties) {
   properties.deleteProperty("PENDING_MODIFIED");
   properties.deleteProperty("PENDING_SINCE");
 }
+dsd
