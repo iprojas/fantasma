@@ -21,14 +21,33 @@ El sitio queda disponible en `http://localhost:3000`.
 solo renderiza headings, párrafos, listas, enlaces, énfasis e imágenes; no
 inserta estilos ni clases de Google Docs.
 
-GitHub Actions vuelve a obtener el documento y despliega `demo/` en GitHub Pages
-cada cinco minutos. Cada consulta evita reutilizar una versión en caché, tanto
-de Google Docs como del navegador. También puede ejecutarse manualmente desde la
-pestaña Actions. El horario de GitHub puede sufrir demoras cuando hay alta
-demanda, pero las ediciones no requieren modificar ni volver a subir el código.
+GitHub Actions obtiene el documento y despliega `demo/` cuando hay un push al
+sitio, se ejecuta manualmente desde la pestaña Actions o lo solicita el Apps
+Script de `apps-script/Code.gs`. Cada consulta evita reutilizar una versión en
+caché, tanto de Google Docs como del navegador.
 
-GitHub Pages es un sitio estático, por lo que no puede recibir una notificación
-directa al editar un Google Doc. Para actualización inmediata por cada edición
-se debe conectar un webhook de Google Drive a un servicio con credenciales (por
-ejemplo, un Worker) que inicie el despliegue; la configuración de ese servicio
-requiere acceso al proyecto de Google y al repositorio.
+### Actualizar al editar el Google Doc
+
+Google Docs no proporciona un trigger de edición para Apps Script. El script
+incluido revisa el documento una vez por minuto y, cuando detecta que dejó de
+cambiar durante 90 segundos, inicia un único despliegue en GitHub.
+
+1. Crea un proyecto en [Apps Script](https://script.google.com/), pega el
+   contenido de `apps-script/Code.gs` y guarda.
+2. En **Configuración del proyecto → Propiedades de secuencia de comandos**,
+   agrega:
+   - `DOC_ID`: el identificador entre `/d/` y `/edit` en la URL del documento.
+   - `GITHUB_OWNER`: `iprojas`.
+   - `GITHUB_REPO`: `fantasma`.
+   - `GITHUB_TOKEN`: token fine-grained de GitHub (ver abajo).
+   - `GITHUB_REF`: `main` (opcional).
+3. Ejecuta `testConfiguration` una vez y concede los permisos solicitados.
+4. Ejecuta `install` una vez. Esto crea el disparador de un minuto; no hace
+   falta volver a ejecutarlo.
+
+Para `GITHUB_TOKEN`, crea un **fine-grained personal access token** en GitHub,
+restringido al repositorio `iprojas/fantasma`, con el permiso de repositorio
+**Actions: Read and write**. No uses un token clásico ni le concedas permisos
+adicionales. El token se guarda solo en las propiedades del proyecto de Apps
+Script; no lo pegues en el código ni en el documento. Conserva ese proyecto sin
+colaboradores, pues sus editores pueden modificar el script que usa el token.
